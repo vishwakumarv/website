@@ -37,16 +37,12 @@ function PostPage() {
   const { post: p } = Route.useLoaderData();
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 md:py-24">
-<<<<<<< HEAD:src/routes/blog.$slug.tsx
-      <Link
-        to="/blog"
-        className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground"
-      >
-=======
-      <Link to="/writeups" className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground">
->>>>>>> ee82526 (Updated website):src/routes/writeups.$slug.tsx
-        <ArrowLeft className="h-3.5 w-3.5" /> back to blog
-      </Link>
+<Link
+  to="/writeups"
+  className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground"
+>
+  <ArrowLeft className="h-3.5 w-3.5" /> back to Writeups
+</Link>
 
       <header className="mt-6">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">

@@ -1505,32 +1505,33 @@ export const experience = [
   {
     role: "Summer Intern",
     company: "Wimera Systems",
-    location: "Bangalore, India (Onsite)",
+    location: "Bangalore, Karnataka (Onsite)",
     period: "May 2026 – Present",
     bullets: [
-      "ESP32 IoT device testing and dashboard validation workflows.",
-      "Exposure to Matter protocol, device debugging, and documentation practices.",
+      "Working on ESP32-based IoT device testing and dashboard validation workflows.",
+      "Gaining hands-on exposure to Matter protocol concepts and IoT application debugging.",
+      "Assisting in device monitoring, documentation, and embedded systems testing.",
     ],
   },
   {
     role: "Machine Learning Intern",
     company: "SaiKet Systems",
-    location: "Remote",
+    location: "Bangalore, Karnataka (Remote)",
     period: "Jan 2026 – Feb 2026",
     bullets: [
-      "Applied ML for classification and anomaly detection on security-adjacent datasets.",
-      "Data preprocessing, model tuning, and reproducible experiment documentation.",
+      "Worked on ML-based workflows using Python and Hugging Face models for cybersecurity-related datasets and anomaly detection.",
+      "Assisted in data preprocessing, model evaluation, and experimental documentation.",
     ],
   },
   {
     role: "Offensive Cyber Security Intern",
     company: "InLighnX Global Pvt. Ltd.",
-    location: "Remote",
+    location: "Bangalore, Karnataka (Remote)",
     period: "Oct 2025 – Dec 2025",
     bullets: [
-      "Structured training across offensive and defensive security methodologies.",
-      "Built Python security utilities including PDF protection and auth-testing harnesses.",
-      "Hands-on with hashing (MD5/SHA), password cracking, and secure coding practices.",
+      "Worked on offensive cybersecurity concepts through hands-on Python-based security tool development in controlled testing environments.",
+      "Developed utilities including PDF protection, credential testing, and authentication analysis tools.",
+      "Gained practical exposure to vulnerability assessment, encryption workflows, and penetration testing fundamentals.",
     ],
   },
 ];

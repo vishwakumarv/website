@@ -1,0 +1,1 @@
+import{j as o}from"./index-BR2Q1fVt.js";import{S as t}from"./Section-BS6cD8cY.js";const s=()=>o.jsx(t,{children:o.jsx("p",{className:"text-muted-foreground",children:"Post not found."})});export{s as notFoundComponent};

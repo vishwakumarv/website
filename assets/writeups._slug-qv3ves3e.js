@@ -1,0 +1,1 @@
+import{j as r}from"./index-BR2Q1fVt.js";import{S as t}from"./Section-BS6cD8cY.js";const i=({error:o})=>r.jsx(t,{children:r.jsx("p",{className:"text-critical",children:o.message})});export{i as errorComponent};

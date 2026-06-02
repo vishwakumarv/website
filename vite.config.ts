@@ -9,13 +9,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    tanstackStart({
-      server: {
-        preset: 'vercel',
-        vercel: {
-          regions: ['iad1'],
-        },
-      },
-    }),
+    tanstackStart(),
   ],
 })

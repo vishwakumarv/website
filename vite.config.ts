@@ -12,6 +12,9 @@ export default defineConfig({
     tanstackStart({
       server: {
         preset: 'vercel',
+        vercel: {
+          regions: ['iad1'],
+        },
       },
     }),
   ],

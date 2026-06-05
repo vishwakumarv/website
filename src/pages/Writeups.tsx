@@ -114,13 +114,13 @@ export default function WriteupsPage() {
                     to={`/writeups/${slug}`}
                     className="group glass flex flex-col rounded-xl p-6 transition hover:border-primary/50"
                   >
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+                    <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">
                       {c} Writeups
-                    </p>
-                    <h3 className="mt-3 font-display text-xl font-semibold">
-                      {count} post{count === 1 ? "" : "s"}
                     </h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+                      {count} post{count === 1 ? "" : "s"}
+                    </p>
+                    <p className="mt-4 text-sm text-muted-foreground">
                       {categoryDescriptions[c] ?? "Explore writeups for this category."}
                     </p>
                   </Link>

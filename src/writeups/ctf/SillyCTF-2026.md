@@ -1,657 +1,421 @@
 ---
 title: "SillyCTF 2026 Writeups"
-
 date: 2026-05-14
-
 category: CTF
-
-tags: [cryptography, reverse, web, forensics]
-
+tags: [cryptography, reverse, web, forensics, osint, steganography]
 image:
   path: /assets/img/posts/SillyCTF.png
+excerpt: Complete writeups and solutions for SillyCTF 2026 CTF challenges across Crypto, Forensics, OSINT, Steganography, and Web Exploitation.
+---
 
-excerpt: Writeups and solutions for SillyCTF 2026 CTF challenges.
+# SillyCTF 2026 — Complete Writeups
+
+> **Repository:** [github.com/vishwakumarv/SillyCTF2026-Writeups](https://github.com/vishwakumarv/SillyCTF2026-Writeups)
 
 ---
 
-# SillyCTF 2026 — Complete Writeups Archive
+## Table of Contents
 
-Repository: https://github.com/vishwakumarv/SillyCTF2026-Writeups
-
-
-# Crypto
-
-## Cryptos
-
-```markdown
-# Cryptos
-
-## Challenge Description
-Cryptography challenge from SillyCTF 2026.
-
-## Category
-Crypto
-
-## Focus Areas
-- Cipher Analysis
-- Decoding
-- Cryptographic Enumeration
-
-## Methodology
-The challenge involved identifying the cryptographic pattern and analyzing the encoded content step by step.
-
-## Skills Used
-- Cryptanalysis
-- Pattern Recognition
-- Encoding Analysis
-
-## Tools
-- CyberChef
-- Python
-- Online Decoders
-
-## Learning Outcome
-Understanding how layered encodings and cryptographic transformations can be reversed systematically.
-```
+- [Cryptography](#cryptography)
+  - [Cryptos](#cryptos)
+  - [ECC](#ecc)
+  - [Kyber](#kyber)
+  - [Quick Maths](#quick-maths)
+  - [RSA](#rsa)
+  - [Six to the Seven](#six-to-the-seven)
+- [Forensics](#forensics)
+  - [Cartmans Business Venture](#cartmans-business-venture)
+  - [Fortnite Dumpy](#fortnite-dumpy)
+  - [Rot Transmit](#rot-transmit)
+- [OSINT](#osint)
+  - [Grass Toucher 3000](#grass-toucher-3000)
+  - [INTERNATIONAL BRAINROT](#international-brainrot)
+  - [Oh My God, They Killed Kenny!](#oh-my-god-they-killed-kenny)
+  - [Sussiest Challenge](#sussiest-challenge)
+- [Steganography](#steganography)
+  - [Like A Rolling Stone](#like-a-rolling-stone)
+  - [Only in Ohio](#only-in-ohio)
+- [Web Exploitation](#web-exploitation)
+  - [Brainrot Inject](#brainrot-inject)
+  - [Hit Me](#hit-me)
+  - [Pibble](#pibble)
+  - [Real Time Rizz](#real-time-rizz)
 
 ---
 
-## ECC
+## Cryptography
 
-```markdown
-# ECC
+### Cryptos
 
-## Challenge Description
-Elliptic Curve Cryptography based challenge.
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | CyberChef, Python, Online Decoders |
+| **Skills** | Cryptanalysis, Pattern Recognition, Encoding Analysis |
 
-## Category
-Crypto
+**Approach:** Identified the cryptographic pattern and reversed layered encodings step by step.
 
-## Focus Areas
-- ECC Analysis
-- Mathematical Reconstruction
-- Cryptographic Weakness Analysis
+**Focus Areas:** Cipher Analysis · Decoding · Cryptographic Enumeration
 
-## Skills Used
-- Python Scripting
-- ECC Understanding
-- Parameter Analysis
-
-## Tools
-- SageMath
-- Python
-
-## Learning Outcome
-Improved understanding of elliptic curve cryptographic concepts and attack methodology.
-```
+**Key Takeaway:** Layered encodings and cryptographic transformations can be reversed systematically by identifying each layer's signature before attempting to decode.
 
 ---
 
-## Kyber
+### ECC
 
-```markdown
-# Kyber
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | SageMath, Python |
+| **Skills** | Python Scripting, ECC Understanding, Parameter Analysis |
 
-## Challenge Description
-Post-Quantum Cryptography challenge based on Kyber.
+**Approach:** Analyzed elliptic curve parameters to identify mathematical weaknesses and reconstruct the cryptographic operation.
 
-## Category
-Crypto
+**Focus Areas:** ECC Analysis · Mathematical Reconstruction · Cryptographic Weakness Analysis
 
-## Focus Areas
-- Lattice Cryptography
-- Kyber Analysis
-- Post-Quantum Concepts
-
-## Skills Used
-- PQC Understanding
-- Cryptanalysis
-
-## Tools
-- Python
-- SageMath
-
-## Learning Outcome
-Introduction to post-quantum cryptographic schemes and attack methodology.
-```
+**Key Takeaway:** Weak or reused curve parameters in ECC implementations can expose the private key to recovery attacks.
 
 ---
 
-## Quick Maths
+### Kyber
 
-```markdown
-# Quick Maths
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | Python, SageMath |
+| **Skills** | PQC Understanding, Cryptanalysis |
 
-## Challenge Description
-Math-based cryptographic challenge.
+**Approach:** Explored the structure of Kyber's lattice-based scheme and analyzed where the challenge deviated from the standard spec.
 
-## Category
-Crypto
+**Focus Areas:** Lattice Cryptography · Kyber Analysis · Post-Quantum Concepts
 
-## Focus Areas
-- Fast Computation
-- Modular Arithmetic
-- Number Theory
-
-## Skills Used
-- Logical Analysis
-- Pattern Recognition
-
-## Tools
-- Python
-
-## Learning Outcome
-Developing systematic approaches for decoding custom transformations.
-```
+**Key Takeaway:** Introduction to attacking post-quantum cryptographic schemes — understanding the underlying lattice math is essential before attempting any analysis.
 
 ---
 
-## RSA
+### Quick Maths
 
-```markdown
-# RSA
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | Python |
+| **Skills** | Logical Analysis, Pattern Recognition, Modular Arithmetic |
 
-## Challenge Description
-RSA cryptography challenge involving parameter analysis.
+**Approach:** Decoded a custom transformation by identifying the number-theoretic pattern and scripting a fast reversal.
 
-## Category
-Crypto
+**Focus Areas:** Fast Computation · Modular Arithmetic · Number Theory
 
-## Focus Areas
-- RSA Weaknesses
-- Prime Factorization
-- Key Recovery
-
-## Skills Used
-- Modular Arithmetic
-- RSA Analysis
-- Scripting
-
-## Tools
-- Python
-- RsaCtfTool
-
-## Learning Outcome
-Understanding practical RSA attack surfaces and exploitation techniques.
-```
+**Key Takeaway:** Custom math-based encodings often follow a recognizable pattern — scripting the inverse is usually straightforward once the pattern is identified.
 
 ---
 
-## Six to the Seven
+### RSA
 
-```markdown
-# Six to the Seven
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | Python, RsaCtfTool |
+| **Skills** | Modular Arithmetic, RSA Analysis, Scripting |
 
-## Challenge Description
-Cryptographic puzzle challenge.
+**Approach:** Identified exploitable RSA parameters (weak primes, small exponent, etc.) and used RsaCtfTool to automate key recovery.
 
-## Category
-Crypto
+**Focus Areas:** RSA Weaknesses · Prime Factorization · Key Recovery
 
-## Focus Areas
-- Encoding Logic
-- Number Transformation
-
-## Skills Used
-- Logical Analysis
-- Pattern Recognition
-
-## Tools
-- Python
-
-## Learning Outcome
-
-```markdown
-Developing systematic approaches for decoding custom transformations.
-```
+**Key Takeaway:** CTF RSA challenges almost always hinge on one of a small set of classical weaknesses — building familiarity with all of them pays off quickly.
 
 ---
 
-# Forensics
+### Six to the Seven
 
-## Cartmans Business Venture
+| Field | Detail |
+|-------|--------|
+| **Category** | Crypto |
+| **Tools** | Python |
+| **Skills** | Logical Analysis, Pattern Recognition |
 
-```markdown
-# Cartmans Business Venture
+**Approach:** Recognized the encoding scheme from the title hint and wrote a targeted decoding script.
 
-## Challenge Description
-Digital forensics challenge involving artifact analysis.
+**Focus Areas:** Encoding Logic · Number Transformation
 
-## Category
-Forensics
-
-## Focus Areas
-- Metadata Inspection
-- File Analysis
-- Artifact Recovery
-
-## Skills Used
-- Investigative Analysis
-- Data Inspection
-
-## Tools
-- exiftool
-- strings
-- binwalk
-
-## Learning Outcome
-Understanding digital artifact extraction and forensic investigation workflow.
-```
+**Key Takeaway:** Challenge titles in CTFs are rarely random — they often hint directly at the transformation in use.
 
 ---
 
-## Fortnite Dumpy
+## Forensics
 
-```markdown
-# Fortnite Dumpy
+### Cartmans Business Venture
 
-## Challenge Description
-Forensics challenge requiring extraction and analysis of hidden data.
+| Field | Detail |
+|-------|--------|
+| **Category** | Forensics |
+| **Tools** | exiftool, strings, binwalk |
+| **Skills** | Investigative Analysis, Metadata Inspection, Data Inspection |
 
-## Category
-Forensics
+**Approach:** Examined embedded metadata and file artifacts to recover hidden information from the challenge file.
 
-## Focus Areas
-- Data Recovery
-- Memory/File Inspection
-- Hidden Information Analysis
+**Focus Areas:** Metadata Inspection · File Analysis · Artifact Recovery
 
-## Skills Used
-- File Carving
-- Metadata Analysis
-- Binary Inspection
-
-## Tools
-- binwalk
-- foremost
-- strings
-- exiftool
-
-## Learning Outcome
-Practical exposure to digital forensics and hidden data recovery.
-```
+**Key Takeaway:** Always run `exiftool` and `strings` on a forensics file before anything else — metadata artifacts are frequently the low-hanging fruit.
 
 ---
 
-## Rot Transmit
+### Fortnite Dumpy
 
-```markdown
-# Rot Transmit
+| Field | Detail |
+|-------|--------|
+| **Category** | Forensics |
+| **Tools** | binwalk, foremost, strings, exiftool |
+| **Skills** | File Carving, Metadata Analysis, Binary Inspection |
 
-## Challenge Description
-Forensics and transmission decoding challenge.
+**Approach:** Used binwalk and foremost to carve embedded files out of the challenge binary, then analyzed the recovered artifacts.
 
-## Category
-Forensics
+**Focus Areas:** Data Recovery · Memory/File Inspection · Hidden Information Analysis
 
-## Focus Areas
-- Transmission Analysis
-- Encoding Recovery
-- Signal Interpretation
-
-## Skills Used
-- Pattern Recognition
-- Encoding Analysis
-
-## Tools
-- CyberChef
-- Python
-
-## Learning Outcome
-Learning how encoded forensic transmissions can be reconstructed and decoded.
-```
+**Key Takeaway:** File carving tools like `binwalk` and `foremost` are essential — compound files frequently conceal other formats at specific byte offsets.
 
 ---
 
-# OSINT
+### Rot Transmit
 
-## Grass Toucher 3000
+| Field | Detail |
+|-------|--------|
+| **Category** | Forensics |
+| **Tools** | CyberChef, Python |
+| **Skills** | Pattern Recognition, Encoding Analysis, Transmission Analysis |
 
-```markdown
-# Grass Toucher 3000
+**Approach:** Reconstructed an encoded transmission by identifying the encoding scheme and reversing it through CyberChef.
 
-## Challenge Description
-Open-source intelligence challenge.
+**Focus Areas:** Transmission Analysis · Encoding Recovery · Signal Interpretation
 
-## Category
-OSINT
-
-## Focus Areas
-- Information Gathering
-- Online Enumeration
-
-## Skills Used
-- Search Techniques
-- Metadata Collection
-
-## Tools
-- Google Dorking
-- Social Enumeration
-
-## Learning Outcome
-Understanding structured OSINT investigation workflows.
-```
+**Key Takeaway:** Encoded forensic transmissions often combine a standard encoding with a simple rotation or XOR — CyberChef's Magic mode is a good first step.
 
 ---
 
-## INTERNATIONAL BRAINROT
+## OSINT
 
-```markdown
-# INTERNATIONAL BRAINROT
+### Grass Toucher 3000
 
-## Challenge Description
-OSINT challenge involving internet-based research.
+| Field | Detail |
+|-------|--------|
+| **Category** | OSINT |
+| **Tools** | Google Dorking, Social Enumeration |
+| **Skills** | Search Techniques, Metadata Collection |
 
-## Category
-OSINT
+**Approach:** Applied structured Google dorks and social platform enumeration to gather and correlate publicly available information.
 
-## Focus Areas
-- Research Methodology
-- Public Data Correlation
+**Focus Areas:** Information Gathering · Online Enumeration
 
-## Skills Used
-- Investigation
-- Correlation Analysis
-
-## Tools
-- Search Engines
-- Public Databases
-
-## Learning Outcome
-Improving information tracing and public intelligence gathering.
-```
+**Key Takeaway:** Building a structured OSINT workflow prevents tunnel vision — enumerate broadly before pivoting to a specific lead.
 
 ---
 
-## Oh My God, They Killed Kenny!
+### INTERNATIONAL BRAINROT
 
-```markdown
-# Oh My God, They Killed Kenny!
+| Field | Detail |
+|-------|--------|
+| **Category** | OSINT |
+| **Tools** | Search Engines, Public Databases |
+| **Skills** | Investigation, Correlation Analysis |
 
-## Challenge Description
-OSINT investigation challenge.
+**Approach:** Cross-referenced public data sources to trace the target's digital footprint across platforms.
 
-## Category
-OSINT
+**Focus Areas:** Research Methodology · Public Data Correlation
 
-## Focus Areas
-- Geolocation
-- Online Investigation
-- Public Information Correlation
-
-## Skills Used
-- Reverse Search
-- Data Correlation
-
-## Tools
-- Google Maps
-- Reverse Image Search
-
-## Learning Outcome
-Developing structured online investigation methodology.
-```
+**Key Takeaway:** International OSINT often requires platform-specific knowledge — different regions favor different social networks and databases.
 
 ---
 
-## Sussiest Challenge
+### Oh My God, They Killed Kenny!
 
-```markdown
-# Sussiest Challenge
+| Field | Detail |
+|-------|--------|
+| **Category** | OSINT |
+| **Tools** | Google Maps, Reverse Image Search |
+| **Skills** | Reverse Search, Data Correlation, Geolocation |
 
-## Challenge Description
-OSINT-based intelligence gathering challenge.
+**Approach:** Used reverse image search and geographic cues within the image to pinpoint the location.
 
-## Category
-OSINT
+**Focus Areas:** Geolocation · Online Investigation · Public Information Correlation
 
-## Focus Areas
-- Public Information Gathering
-- Enumeration
-
-## Skills Used
-- Investigation
-- Search Correlation
-
-## Tools
-- Google
-- Metadata Tools
-
-## Learning Outcome
-Understanding practical OSINT workflows and analysis.
-```
+**Key Takeaway:** Geolocation OSINT is a combination of image metadata, environmental cues (signage, vegetation, architecture), and iterative map search.
 
 ---
 
-# Steganography
+### Sussiest Challenge
 
-## Like A Rolling Stone
+| Field | Detail |
+|-------|--------|
+| **Category** | OSINT |
+| **Tools** | Google, Metadata Tools |
+| **Skills** | Investigation, Search Correlation |
 
-```markdown
-# Like A Rolling Stone
+**Approach:** Gathered and correlated public intelligence to identify the target entity described in the challenge.
 
-## Challenge Description
-Steganography challenge involving hidden data.
+**Focus Areas:** Public Information Gathering · Enumeration
 
-## Category
-Stego
-
-## Focus Areas
-- Hidden Data Extraction
-- File Inspection
-
-## Skills Used
-- Steganalysis
-- Binary Inspection
-
-## Tools
-- stegsolve
-- zsteg
-- strings
-
-## Learning Outcome
-Understanding practical steganographic analysis techniques.
-```
+**Key Takeaway:** "Sus" challenges in OSINT often require reading between the lines — the challenge description itself may contain the first lead.
 
 ---
 
-## Only in Ohio
+## Steganography
 
-```markdown
-# Only in Ohio
+### Like A Rolling Stone
 
-## Challenge Description
-Steganography challenge focused on uncovering concealed information.
+| Field | Detail |
+|-------|--------|
+| **Category** | Stego |
+| **Tools** | stegsolve, zsteg, strings |
+| **Skills** | Steganalysis, Binary Inspection |
 
-## Category
-Stego
+**Approach:** Ran the image through stegsolve bit-plane analysis and confirmed hidden data with zsteg.
 
-## Focus Areas
-- Embedded Data Analysis
-- Hidden Message Recovery
+**Focus Areas:** Hidden Data Extraction · File Inspection
 
-## Skills Used
+**Key Takeaway:** For image stego, always run through `zsteg` (PNG/BMP) first — it covers LSB, color channel, and bit-plane combinations automatically.
+
+---
+
+### Only in Ohio
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Stego |
+| **Tools** | zsteg, binwalk |
+| **Skills** | Steganography Analysis, Pattern Recognition |
+
+**Approach:** Identified appended data via binwalk and extracted the concealed message with zsteg.
+
+**Focus Areas:** Embedded Data Analysis · Hidden Message Recovery
+
+**Key Takeaway:** Checking for appended data at the end of a file (after the EOF marker) is a quick win in stego challenges that many solvers overlook.
+
+---
+
+## Web Exploitation
+
+### Brainrot Inject
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Web |
+| **Tools** | Burp Suite, Browser DevTools |
+| **Skills** | Payload Crafting, Enumeration |
+
+**Approach:** Identified an injection point through DevTools, crafted a payload, and confirmed execution via Burp Suite intercepted responses.
+
+**Focus Areas:** Injection Attacks · Input Validation Weaknesses
+
+**Key Takeaway:** Always map all input fields before testing — injection surfaces are not always the obvious ones (forms, search boxes).
+
+---
+
+### Hit Me
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Web |
+| **Tools** | curl, Burp Suite |
+| **Skills** | Traffic Inspection, Web Enumeration |
+
+**Approach:** Intercepted and analyzed the HTTP request/response cycle to identify a manipulable parameter or header.
+
+**Focus Areas:** HTTP Analysis · Request Manipulation
+
+**Key Takeaway:** HTTP headers (especially custom ones) are frequently overlooked attack surfaces in web challenges.
+
+---
+
+### Pibble
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Web |
+| **Tools** | Burp Suite, Browser DevTools |
+| **Skills** | Manual Testing, Payload Testing |
+
+**Approach:** Performed systematic web enumeration and manually tested endpoints until a vulnerability was identified and exploited.
+
+**Focus Areas:** Web Enumeration · Vulnerability Discovery
+
+**Key Takeaway:** Methodical enumeration — spidering the app, checking JS source, reviewing API paths — is more reliable than jumping straight to automated scanning.
+
+---
+
+### Real Time Rizz
+
+| Field | Detail |
+|-------|--------|
+| **Category** | Web |
+| **Tools** | Burp Suite, WebSocket Analysis |
+| **Skills** | Web Testing, Traffic Manipulation |
+
+**Approach:** Analyzed live WebSocket traffic in Burp Suite and manipulated real-time messages to trigger the vulnerability.
+
+**Focus Areas:** Dynamic Request Analysis · Real-time Exploitation
+
+**Key Takeaway:** WebSocket traffic requires a different mindset than HTTP — messages can be stateful and order-dependent, so replay attacks may need careful sequencing.
+
+---
+
+## Skills & Tools Summary
+
+### Skills Demonstrated
+
+- Reverse Engineering
+- Digital Forensics
+- Cryptanalysis (RSA, ECC, PQC)
+- Binary Inspection & File Carving
 - Steganography Analysis
-- Pattern Recognition
+- OSINT Investigation & Geolocation
+- Web Exploitation (Injection, HTTP Manipulation, WebSockets)
+- Vulnerability Analysis
+- Python Scripting
+- Traffic Analysis with Burp Suite
+- Metadata Inspection
 
-## Tools
-- zsteg
-- binwalk
+### Tools Used
 
-## Learning Outcome
-Improved understanding of hidden data extraction techniques.
+| Category | Tools |
+|----------|-------|
+| **Crypto** | Python, SageMath, RsaCtfTool, CyberChef |
+| **Forensics** | binwalk, foremost, exiftool, strings |
+| **Stego** | stegsolve, zsteg |
+| **Web** | Burp Suite, curl, Browser DevTools |
+| **OSINT** | Google Dorking, Reverse Image Search, Google Maps |
+| **RE / General** | Ghidra, GDB, pwntools |
+
+---
+
+## Repository Structure
+
 ```
-
----
-
-# Web Exploitation
-
-## Brainrot Inject
-
-```markdown
-# Brainrot Inject
-
-## Challenge Description
-Web exploitation challenge involving injection vulnerabilities.
-
-## Category
-Web
-
-## Focus Areas
-- Injection Attacks
-- Input Validation Weaknesses
-
-## Skills Used
-- Payload Crafting
-- Enumeration
-
-## Tools
-- Burp Suite
-- Browser DevTools
-
-## Learning Outcome
-Understanding web injection attack vectors and exploitation workflow.
-```
-
----
-
-## Hit Me
-
-```markdown
-# Hit Me
-
-## Challenge Description
-Web challenge focused on request manipulation and exploitation.
-
-## Category
-Web
-
-## Focus Areas
-- HTTP Analysis
-- Request Manipulation
-
-## Skills Used
-- Traffic Inspection
-- Web Enumeration
-
-## Tools
-- curl
-- Burp Suite
-
-## Learning Outcome
-Developing understanding of HTTP exploitation methodology.
-```
-
----
-
-## Pibble
-
-```markdown
-# Pibble
-
-## Challenge Description
-Web exploitation challenge involving application analysis.
-
-## Category
-Web
-
-## Focus Areas
-- Web Enumeration
-- Vulnerability Discovery
-
-## Skills Used
-- Manual Testing
-- Payload Testing
-
-## Tools
-- Burp Suite
-- Browser DevTools
-
-## Learning Outcome
-Understanding systematic web vulnerability discovery and exploitation.
-```
-
----
-
-## Real Time Rizz
-
-```markdown
-# Real Time Rizz
-
-## Challenge Description
-Real-time web exploitation challenge.
-
-## Category
-Web
-
-## Focus Areas
-- Dynamic Request Analysis
-- Real-time Exploitation
-
-## Skills Used
-- Web Testing
-- Traffic Manipulation
-
-## Tools
-- Burp Suite
-- WebSockets Analysis
-
-## Learning Outcome
-Understanding live request analysis and exploitation workflows.
-```
-
----
-
-# Technical Skills Demonstrated
-
-* Reverse Engineering
-* Digital Forensics
-* Cryptanalysis
-* Binary Inspection
-* Steganography
-* OSINT Investigation
-* Web Exploitation
-* Vulnerability Analysis
-* Python Scripting
-* Enumeration
-* Traffic Analysis
-* Metadata Inspection
-
----
-
-# Tools & Technologies Used
-
-* Python
-* Burp Suite
-* Ghidra
-* binwalk
-* exiftool
-* CyberChef
-* pwntools
-* GDB
-* SageMath
-* Browser DevTools
-* curl
-* stegsolve
-* zsteg
-
----
-
-# Repository Structure
-
-```text
-writeups/
+SillyCTF2026-Writeups/
 ├── crypto/
+│   ├── cryptos/
+│   ├── ecc/
+│   ├── kyber/
+│   ├── quick-maths/
+│   ├── rsa/
+│   └── six-to-the-seven/
 ├── forensics/
-├── misc/
+│   ├── cartmans-business-venture/
+│   ├── fortnite-dumpy/
+│   └── rot-transmit/
 ├── osint/
-├── pwn/
-├── rev/
+│   ├── grass-toucher-3000/
+│   ├── international-brainrot/
+│   ├── oh-my-god-they-killed-kenny/
+│   └── sussiest-challenge/
 ├── stego/
+│   ├── like-a-rolling-stone/
+│   └── only-in-ohio/
 └── web/
+    ├── brainrot-inject/
+    ├── hit-me/
+    ├── pibble/
+    └── real-time-rizz/
 ```
 
 ---
 
-# Repository
-
-[https://github.com/vkumxr/SillyCTF2026-Writeups](https://github.com/vkumxr/SillyCTF2026-Writeups)
+> Full solutions, scripts, and flag proofs available in the [GitHub repository](https://github.com/vishwakumarv/SillyCTF2026-Writeups).

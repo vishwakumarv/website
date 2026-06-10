@@ -1,281 +1,154 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { Section } from "@/components/Section";
-import { posts, categories } from "@/data/portfolio";
-import { Search, Clock, ArrowRight } from "lucide-react";
+import { writeups } from "@/lib/writeups";
+import { Search } from "lucide-react";
 
-const categorySlugs = {
-  All: "all",
-  CTF: "ctf",
-  HackTheBox: "htb",
-  "Security Research": "security-research",
-} as const;
-
-const slugToCategory = {
-  all: "All",
-  ctf: "CTF",
+const categories = ["ctf", "htb", "thm"] as const;
+const categoryLabels: Record<typeof categories[number], string> = {
+  ctf: "CTF Writeups",
   htb: "HackTheBox",
-  hackthebox: "HackTheBox",
-  "security-research": "Security Research",
-  securityresearch: "Security Research",
-} as const;
-
-const categoryDescriptions: Record<string, string> = {
-  CTF: "Challenge walkthroughs and solution reports from CTF events.",
-  HackTheBox: "HackTheBox machine writeups focusing on exploitation, privilege escalation, and lab analysis.",
-  "Security Research": "Research notes on malware, detection, reverse engineering, and security tooling.",
+  thm: "TryHackMe",
 };
 
-function getCategorySlug(category: string) {
-  return (categorySlugs as Record<string, string>)[category] ?? category.toLowerCase();
+function getCategoryLabel(category: string) {
+  return categoryLabels[category as keyof typeof categoryLabels] ?? category;
 }
 
-function getCategoryFromSlug(slug?: string) {
-  if (!slug) return "All";
-  return slugToCategory[slug.toLowerCase() as keyof typeof slugToCategory] ?? undefined;
+function isValidCategory(category?: string): category is typeof categories[number] {
+  return typeof category === "string" && categories.includes(category as typeof categories[number]);
 }
 
 export default function WriteupsPage() {
   const { category: categoryParam } = useParams();
   const [query, setQuery] = useState("");
 
-  const selectedCategory = getCategoryFromSlug(categoryParam);
-  if (categoryParam && !selectedCategory) {
+  const selectedCategory = categoryParam && isValidCategory(categoryParam) ? categoryParam : "ctf";
+  const selectedCategoryLabel = getCategoryLabel(selectedCategory);
+
+  if (categoryParam && !isValidCategory(categoryParam)) {
     return <Navigate to="/writeups" replace />;
   }
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const lowerQuery = query.trim().toLowerCase();
 
-    return posts.filter((p) => {
-      const matchesCat = selectedCategory === "All" || p.category === selectedCategory;
+    return writeups.filter((post) => {
+      const matchesCategory = post.category === selectedCategory;
+      const matchesQuery =
+        !lowerQuery ||
+        post.title.toLowerCase().includes(lowerQuery) ||
+        post.excerpt.toLowerCase().includes(lowerQuery) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery));
 
-      const matchesQ =
-        !q ||
-        p.title.toLowerCase().includes(q) ||
-        p.excerpt.toLowerCase().includes(q) ||
-        p.tags.some((t) => t.toLowerCase().includes(q));
-
-      return matchesCat && matchesQ;
+      return matchesCategory && matchesQuery;
     });
   }, [query, selectedCategory]);
-
-  const featured = posts.filter(
-    (p) => p.featured && (selectedCategory === "All" || p.category === selectedCategory)
-  );
 
   return (
     <>
       <Helmet>
-        <title>
-          {selectedCategory === "All" ? "Writeups — Malware, DFIR & Detection Notes" : `${selectedCategory} Writeups — Malware, DFIR & Detection Notes`}
-        </title>
-
+        <title>{`${selectedCategoryLabel} — Malware, DFIR & Detection Notes`}</title>
         <meta
           name="description"
-          content="Technical writeups on malware analysis, DFIR, detection engineering, Linux research, reverse engineering, and security tooling."
+          content={`${selectedCategoryLabel} and walkthroughs covering challenge solutions, exploitation, and analysis.`}
         />
-
-        <meta
-          property="og:title"
-          content={selectedCategory === "All" ? "Writeups — Vishwa Kumar" : `${selectedCategory} Writeups — Vishwa Kumar`}
-        />
-
-        <meta
-          property="og:description"
-          content="Security writeups and notes."
-        />
-
-        <meta
-          property="og:url"
-          content={categoryParam ? `/writeups/${categoryParam}` : "/writeups"}
-        />
-
-        <link rel="canonical" href={categoryParam ? `/writeups/${categoryParam}` : "/writeups"} />
+        <meta property="og:title" content={`${selectedCategoryLabel} — Vishwa Kumar`} />
+        <meta property="og:description" content={`${selectedCategoryLabel} and notes.`} />
+        <meta property="og:url" content="/writeups" />
+        <link rel="canonical" href="/writeups" />
       </Helmet>
 
       <Section
         eyebrow="Writeups"
-        title="Technical writeups & notes"
-        description="Short, structured notes on malware analysis, DFIR, detection engineering, Linux, reverse engineering, and the small tools that make analyst work faster."
+        title={selectedCategoryLabel}
+        description="Curated challenge writeups and analysis for security competitions and labs."
       >
-        {selectedCategory === "All" && (
-          <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {categories
-              .filter((c) => c !== "All")
-              .map((c) => {
-                const slug = getCategorySlug(c);
-                const count = posts.filter((p) => p.category === c).length;
-
-                return (
-                  <Link
-                    key={c}
-                    to={`/writeups/${slug}`}
-                    className="group glass flex flex-col rounded-xl p-6 transition hover:border-primary/50"
-                  >
-                    <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-                      {c} Writeups
-                    </h3>
-                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-                      {count} post{count === 1 ? "" : "s"}
-                    </p>
-                    <p className="mt-4 text-sm text-muted-foreground">
-                      {categoryDescriptions[c] ?? "Explore writeups for this category."}
-                    </p>
-                  </Link>
-                );
-              })}
-          </div>
-        )}
-
-        {/* Featured */}
-        {featured.length > 0 && (
-          <div className="mb-12 grid gap-4 md:grid-cols-2">
-            {featured.map((p) => (
-              <Link
-                key={p.slug}
-                to={`/writeups/${getCategorySlug(p.category)}/${p.slug}`}
-                className="group glass flex flex-col rounded-xl p-6 transition hover:border-primary/50"
-              >
-                <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-primary">
-                  featured · {p.category}
-                </div>
-
-                <h3 className="mt-3 font-display text-xl font-semibold">
-                  {p.title}
-                </h3>
-
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {p.excerpt}
-                </p>
-
-                <PostMeta
-                  date={p.date}
-                  minutes={p.readingMinutes}
-                />
-              </Link>
-            ))}
-          </div>
-        )}
-
-        {/* Controls */}
-        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="mb-6">
           <div className="relative w-full md:max-w-xs">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search posts, tags…"
+              placeholder="Search writeups, tags…"
               className="w-full rounded-md border border-border bg-surface/60 py-2 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground/70 focus:border-primary/60"
             />
           </div>
-
-          <div className="flex flex-wrap gap-1.5">
-            {categories.map((c) => {
-              const slug = c === "All" ? "" : getCategorySlug(c);
-              const to = slug ? `/writeups/${slug}` : "/writeups";
-
-              return (
-                <Link
-                  key={c}
-                  to={to}
-                  className={`rounded-full border px-3 py-1 text-xs transition ${
-                    selectedCategory === c
-                      ? "border-primary/60 bg-primary/15 text-foreground"
-                      : "border-border bg-surface/40 text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {c}
-                </Link>
-              );
-            })}
-          </div>
         </div>
 
-        {/* List */}
-        {selectedCategory !== "All" ? (
-          <div className="grid gap-3">
-            {filtered.map((p) => (
-              <Link
-                key={p.slug}
-                to={`/writeups/${getCategorySlug(p.category)}/${p.slug}`}
-                className="group glass flex flex-col gap-2 rounded-xl p-5 transition hover:border-primary/50 md:flex-row md:items-center md:justify-between"
-              >
-                <div className="flex-1">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-primary">
-                    {p.category}
-                  </p>
+        <div className="mb-8 flex flex-wrap gap-4 border-b border-border pb-6">
+          {categories.map((category) => (
+            <Link
+              key={category}
+              to={category === "ctf" ? "/writeups" : `/writeups/${category}`}
+              className={`glass flex flex-col rounded-3xl border px-6 py-4 text-sm font-semibold transition hover:border-primary/50 ${
+                selectedCategory === category
+                  ? "border-primary/60 bg-primary/15 text-foreground"
+                  : "border-border bg-surface/40 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {getCategoryLabel(category)}
+            </Link>
+          ))}
+        </div>
 
-                  <h3 className="mt-1.5 font-display text-lg font-semibold">
-                    {p.title}
-                  </h3>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((post) => (
+            <Link
+              key={post.slug}
+              to={`/writeups/${post.category}/${post.slug}`}
+              className="group glass flex flex-col overflow-hidden rounded-3xl border border-border bg-surface-elevated transition hover:border-primary/50"
+            >
+              {post.cover ? (
+                <img
+                  src={post.cover}
+                  alt={post.title}
+                  className="h-40 w-full object-cover"
+                />
+              ) : null}
 
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {p.excerpt}
-                  </p>
-
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded border border-border bg-surface-elevated/50 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
-                      >
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
+              <div className="flex flex-1 flex-col gap-4 p-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-border px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-primary">
+                    {getCategoryLabel(post.category)}
+                  </span>
+                  {post.tags.slice(0, 3).map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-border bg-surface/80 px-2 py-1 text-[10px] text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="flex items-center gap-4 md:flex-col md:items-end">
-                  <PostMeta
-                    date={p.date}
-                    minutes={p.readingMinutes}
-                  />
-
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" />
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                    {post.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                    {post.excerpt}
+                  </p>
                 </div>
-              </Link>
-            ))}
 
-            {filtered.length === 0 && (
-              <p className="py-10 text-center font-mono text-sm text-muted-foreground">
-                no posts match.
-              </p>
-            )}
-          </div>
-        ) : (
-          <div className="rounded-2xl border border-border bg-surface-elevated/80 p-8 text-center text-sm text-muted-foreground">
-            Pick a writeup category above to see the matching posts.
+                <div className="mt-auto flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  <span>{new Date(post.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}</span>
+                  <span>{post.readingMinutes} min read</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="mt-10 rounded-3xl border border-border bg-surface-elevated p-12 text-center text-base text-muted-foreground">
+            {selectedCategory === "htb" && "No HackTheBox writeups available yet."}
+            {selectedCategory === "thm" && "No TryHackMe writeups available yet."}
+            {selectedCategory === "ctf" && "No CTF writeups match your search."}
           </div>
         )}
       </Section>
     </>
-  );
-}
-
-function PostMeta({
-  date,
-  minutes,
-}: {
-  date: string;
-  minutes: number;
-}) {
-  return (
-    <div className="mt-3 flex items-center gap-3 font-mono text-[11px] text-muted-foreground">
-      <span>
-        {new Date(date).toLocaleDateString(undefined, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </span>
-
-      <span className="inline-flex items-center gap-1">
-        <Clock className="h-3 w-3" />
-        {minutes} min
-      </span>
-    </div>
   );
 }

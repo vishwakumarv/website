@@ -9,6 +9,7 @@ import Experience from "@/pages/Experience";
 import Resume from "@/pages/Resume";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
+import WriteupsLanding from "@/pages/WriteupsLanding";
 import Writeups from "@/pages/Writeups";
 import WriteupDetail from "@/pages/WriteupDetail";
 import NotFound from "@/pages/NotFound";
@@ -26,7 +27,7 @@ export default function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/writeups" element={<Writeups />} />
+          <Route path="/writeups" element={<WriteupsLanding />} />
           <Route path="/writeups/:category" element={<Writeups />} />
           <Route path="/writeups/:category/:slug" element={<WriteupDetail />} />
           <Route path="*" element={<NotFound />} />

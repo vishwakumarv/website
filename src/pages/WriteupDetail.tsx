@@ -85,19 +85,20 @@ export default function WriteupDetail() {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}
           components={{
-            code({ inline, className, children, ...props }) {
-              return inline ? (
-                <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-[13px] text-primary" {...props}>
-                  {children}
-                </code>
-              ) : (
-                <pre className="my-4 overflow-x-auto rounded-lg border border-border bg-surface-elevated p-4 font-mono text-[13px] leading-relaxed text-foreground/85">
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                </pre>
-              );
-            },
+            code({ className, children, ...props }) {
+  const isBlock = className?.startsWith("language-");
+  return isBlock ? (
+    <pre className="my-4 overflow-x-auto rounded-lg border border-border bg-surface-elevated p-4 font-mono text-[13px] leading-relaxed text-foreground/85">
+      <code className={className} {...props}>
+        {children}
+      </code>
+    </pre>
+  ) : (
+    <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-[13px] text-primary" {...props}>
+      {children}
+    </code>
+  );
+},
             a: ({ href, children }) => (
               <a
                 href={href}

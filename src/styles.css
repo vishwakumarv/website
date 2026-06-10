@@ -395,3 +395,18 @@
 .prose-post tbody tr:last-child td {
   border-bottom: none;
 }
+
+/* Make markdown images and pre blocks responsive within writeups */
+.prose-post img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.6rem auto;
+  border-radius: 0.75rem;
+}
+
+.prose-post pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.9rem 0;
+}

@@ -76,7 +76,7 @@ export default function WriteupDetail() {
         <img
           src={post.cover}
           alt={post.title}
-          className="mt-8 rounded-3xl border border-border object-cover"
+          className="mt-8 rounded-3xl border border-border object-cover w-full max-w-full h-auto"
         />
       ) : null}
 
@@ -108,6 +108,15 @@ export default function WriteupDetail() {
               >
                 {children}
               </a>
+            ),
+            img: ({ src, alt, ...props }) => (
+              // Ensure markdown images are responsive on mobile
+              <img
+                src={String(src)}
+                alt={String(alt ?? "")}
+                className="my-4 w-full max-w-full rounded-2xl border border-border object-cover"
+                {...props}
+              />
             ),
           }}
         >

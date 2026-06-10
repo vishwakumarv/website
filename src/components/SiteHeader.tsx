@@ -69,7 +69,7 @@ export function SiteHeader() {
               <Shield className="h-3.5 w-3.5" />
             </span>
             <span>
-              vishwa<span className="text-primary">.</span>kumar
+              vishwa<span className="text-primary">@</span>kali
             </span>
           </Link>
 

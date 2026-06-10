@@ -9,13 +9,25 @@ export type WriteupMetadata = {
   excerpt: string;
 };
 
-export type WriteupCategorySlug = "ctf" | "htb" | "thm" | string;
+export type WriteupCategorySlug = "ctf" | "hackthebox" | "tryhackme" | string;
 
 export type Writeup = WriteupMetadata & {
   slug: string;
   body: string;
   readingMinutes: number;
 };
+
+function getCategoryFromPath(path: string): WriteupCategorySlug {
+  const match = path.match(/writeups\/([^\/]+)\//i);
+  if (!match) return "general";
+
+  const folder = match[1].toLowerCase();
+  if (folder === "ctf") return "ctf";
+  if (folder === "hackthebox" || folder === "htb") return "hackthebox";
+  if (folder === "tryhackme" || folder === "thm") return "tryhackme";
+
+  return folder;
+}
 
 function parseYamlValue(value: string) {
   const raw = value.trim();
@@ -136,7 +148,11 @@ function parseWriteupModule(path: string, content: string): Writeup {
   const date = new Date(dateString);
   const formattedDate = Number(date) ? date.toISOString() : new Date().toISOString();
 
-  const category = normalizeCategory(attributes.category ?? attributes.categories);
+  const folderCategory = getCategoryFromPath(path);
+  const category =
+    folderCategory !== "general"
+      ? folderCategory
+      : normalizeCategory(attributes.category ?? attributes.categories);
   const tags = normalizeTags(attributes.tags);
   const cover = attributes.cover ? String(attributes.cover) : undefined;
   const excerpt = attributes.excerpt ? String(attributes.excerpt) : generateExcerpt(body);
@@ -172,4 +188,8 @@ export const writeupCategories = [
 
 export const writeupBySlug = Object.fromEntries(
   writeups.map((post) => [post.slug.toLowerCase(), post])
+);
+
+export const writeupByCategoryAndSlug = Object.fromEntries(
+  writeups.map((post) => [`${post.category}/${post.slug.toLowerCase()}`, post])
 );

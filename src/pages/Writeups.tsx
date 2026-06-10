@@ -6,17 +6,17 @@ import { writeups } from "@/lib/writeups";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const categories = ["ctf", "htb", "thm"] as const;
+const categories = ["ctf", "hackthebox", "tryhackme"] as const;
 const categoryLabels: Record<typeof categories[number], string> = {
   ctf: "CTF Writeups",
-  htb: "HackTheBox",
-  thm: "TryHackMe",
+  hackthebox: "HackTheBox",
+  tryhackme: "TryHackMe",
 };
 
 const categoryDescriptions: Record<typeof categories[number], string> = {
   ctf: "Explore capture-the-flag writeups covering cryptography, web exploitation, forensics, and binary challenges.",
-  htb: "Browse HackTheBox writeups for exploitation, privilege escalation, and lab analysis.",
-  thm: "Browse TryHackMe writeups for defensive analysis, web labs, and practical exercises.",
+  hackthebox: "Browse HackTheBox writeups for exploitation, privilege escalation, and lab analysis.",
+  tryhackme: "Browse TryHackMe writeups for defensive analysis, web labs, and practical exercises.",
 };
 
 function getCategoryLabel(category: string) {
@@ -126,8 +126,8 @@ export default function WriteupsPage() {
 
         {filtered.length === 0 && (
           <div className="mt-10 rounded-3xl border border-border bg-surface-elevated p-12 text-center text-base text-muted-foreground">
-            {selectedCategory === "htb" && "No HackTheBox writeups available yet."}
-            {selectedCategory === "thm" && "No TryHackMe writeups available yet."}
+            {selectedCategory === "hackthebox" && "No HackTheBox writeups available yet."}
+            {selectedCategory === "tryhackme" && "No TryHackMe writeups available yet."}
             {selectedCategory === "ctf" && "No CTF writeups available yet."}
           </div>
         )}

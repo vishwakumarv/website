@@ -1,6 +1,6 @@
 ﻿import { useParams, Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { writeupBySlug } from "@/lib/writeups";
+import { writeupByCategoryAndSlug, writeupBySlug } from "@/lib/writeups";
 import { ArrowLeft, Clock } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -13,7 +13,14 @@ function getCategorySlug(category: string) {
 
 export default function WriteupDetail() {
   const { category: categoryParam, slug } = useParams();
-  const post = slug ? writeupBySlug[slug.toLowerCase()] : undefined;
+  const slugKey = slug?.toLowerCase();
+  const categoryKey = categoryParam?.toLowerCase();
+  const post =
+    slugKey && categoryKey
+      ? writeupByCategoryAndSlug[`${categoryKey}/${slugKey}`] || writeupBySlug[slugKey]
+      : slugKey
+      ? writeupBySlug[slugKey]
+      : undefined;
 
   if (!post) {
     return <Navigate to="/writeups" replace />;

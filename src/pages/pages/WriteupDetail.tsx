@@ -44,7 +44,7 @@ export default function WriteupDetail() {
   const backLink = routeCategory ? `/writeups/${categoryParam}` : "/writeups";
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+    <article className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 md:py-24 lg:max-w-5xl">
       <Helmet>
         <title>{p.title} — Vishwa Kumar</title>
         <meta name="description" content={p.excerpt} />

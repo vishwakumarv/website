@@ -1387,6 +1387,9 @@ PORT     STATE SERVICE VERSION
 > **Q2 — What is running on the higher port?**  
 > Port 2222 is running SSH. **Answer: ssh**
 
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal2.png)
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal3.png)
+
 ### Why Non-Standard SSH?
 
 Moving SSH to port 2222 is a common (though weak) security-through-obscurity measure to reduce automated brute-force attempts targeting port 22. It doesn't change the attack surface meaningfully — nmap still finds it — but it reduces noise from bots scanning only the default port.
@@ -1412,6 +1415,8 @@ If anonymous login is allowed, look for readable files — even a README can con
 Visiting \`http://10.10.X.X/\` presents the default Apache landing page — nothing useful in visible content or page source.
 
 ### Directory Brute-Force with Gobuster
+
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal4.png)
 
 \`\`\`bash
 gobuster dir -u http://10.10.X.X -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
@@ -1446,6 +1451,8 @@ searchsploit "CMS Made Simple 2.2.8"
 
 > **Q4 — What kind of vulnerability?**  
 > **Answer: SQLi**
+
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal5.png)
 
 ### What is Blind Time-Based SQLi?
 
@@ -1542,6 +1549,10 @@ Login successful — we're in as \`mitch\`.
 > **Q6 — Where can you login with the obtained details?**  
 > **Answer: ssh**
 
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/browse.png)
+
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/browse1.png)
+
 ---
 
 ## Step 7 — User Flag
@@ -1554,6 +1565,8 @@ cat user.txt
 
 > **Q7 — What's the user flag?**  
 > **Answer: G00d j0b, keep up!**
+
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal6.png)
 
 ---
 

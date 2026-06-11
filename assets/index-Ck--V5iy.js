@@ -1349,6 +1349,8 @@ LFI test: /?page=../../../../etc/passwd → confirmed
 
 ## Overview
 
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/simplectf.png)
+
 Simple CTF is a beginner-to-intermediate TryHackMe room that walks through a full attack chain — from initial recon and CVE identification to credential extraction, SSH access, and privilege escalation via a GTFOBins vector. The target runs **CMS Made Simple**, a PHP-based content management system with a known SQL injection vulnerability. The path from anonymous visitor to root is methodical and teaches core pentesting fundamentals without any rabbit holes.
 
 ---
@@ -1360,6 +1362,9 @@ nmap -sV -T4 10.10.X.X
 \`\`\`
 
 **Results:**
+
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/simplectf/terminal1.png)
+
 
 \`\`\`
 PORT     STATE SERVICE VERSION

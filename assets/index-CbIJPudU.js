@@ -1092,6 +1092,8 @@ os.setuid(0) → /bin/bash → root.txt
 
 ![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/thm-lofi.jpeg)
 
+![TryHackMe Lo-Fi Completed](/images/writeups/tryhackme/lofi.jpeg)
+
 Lo-Fi is a beginner-friendly TryHackMe room themed around a chill lofi music website. Beneath the aesthetic exterior lies a classic **Local File Inclusion (LFI)** vulnerability — one of the most fundamental and commonly found web vulnerabilities in real-world applications and CTFs alike. No bruteforcing, no Metasploit, no privilege escalation. Just clean recon, a vulnerable parameter, and directory traversal.
 
 **Flag:** \`flag{e4478e0eab69bd642b8238765dcb7d18}\`

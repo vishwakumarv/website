@@ -71,51 +71,52 @@ export default function WriteupsPage() {
         eyebrow="Writeups"
         title={selectedCategoryLabel}
         description={categoryDescriptions[selectedCategory]}
+        className="writeups-section py-10 sm:py-14 md:py-24"
       >
-        <div className="mb-6 md:max-w-md">
+        <div className="mb-4 md:mb-6 md:max-w-md">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search writeups, tags…"
-              className="w-full rounded-md border border-border bg-surface/60 py-2 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground/70 focus:border-primary/60"
+              className="w-full rounded-md border border-border bg-surface/60 py-2.5 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground/70 focus:border-primary/60"
             />
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
           {filtered.map((post) => (
             <Link
               key={post.slug}
               to={`/writeups/${post.category}/${post.slug}`}
-              className="group glass flex flex-col overflow-hidden rounded-3xl border border-border bg-surface-elevated transition hover:border-primary/50"
+              className="group glass flex flex-col overflow-hidden rounded-xl border border-border bg-surface-elevated transition hover:border-primary/50 sm:rounded-2xl lg:rounded-3xl"
             >
               {post.cover ? (
                 <img
                   src={post.cover}
                   alt={post.title}
-                  className="h-40 w-full object-cover"
+                  className="h-32 w-full object-cover sm:h-36 lg:h-40"
                 />
               ) : null}
 
-              <div className="flex flex-1 flex-col gap-4 p-6">
+              <div className="flex flex-1 flex-col gap-2.5 p-4 sm:gap-4 sm:p-5 lg:p-6">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-border px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-primary">
+                  <span className="rounded-full border border-border px-2 py-0.5 text-[9px] uppercase tracking-[0.18em] text-primary sm:py-1 sm:text-[10px] sm:tracking-[0.2em]">
                     {getCategoryLabel(post.category)}
                   </span>
                 </div>
 
                 <div>
-                  <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                  <h2 className="font-display text-lg font-semibold leading-snug tracking-tight text-foreground sm:text-xl">
                     {post.title}
                   </h2>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  <p className="mt-2 line-clamp-3 text-sm leading-5 text-muted-foreground sm:mt-3 sm:leading-6">
                     {post.excerpt}
                   </p>
                 </div>
 
-                <div className="mt-auto flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                <div className="mt-auto flex items-center justify-between pt-1 text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px] sm:tracking-[0.2em]">
                   <span>{new Date(post.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}</span>
                   <span>{post.readingMinutes} min read</span>
                 </div>
@@ -125,7 +126,7 @@ export default function WriteupsPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="mt-10 rounded-3xl border border-border bg-surface-elevated p-12 text-center text-base text-muted-foreground">
+          <div className="mt-6 rounded-xl border border-border bg-surface-elevated p-8 text-center text-sm text-muted-foreground sm:mt-10 sm:rounded-3xl sm:p-12 sm:text-base">
             {selectedCategory === "hackthebox" && "No HackTheBox writeups available yet."}
             {selectedCategory === "tryhackme" && "No TryHackMe writeups available yet."}
             {selectedCategory === "ctf" && "No CTF writeups available yet."}

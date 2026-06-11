@@ -21,6 +21,8 @@ import {
 
 const snapshotIcons = [ShieldCheck, Terminal, Search, FileText, GitBranch, Bot];
 
+const credibilityBadges = ["Bugcrowd Researcher", "THM Top 15%", "CTF Player"];
+
 export default function Home() {
   return (
     <>
@@ -65,7 +67,8 @@ export default function Home() {
                         SOC Analyst · DFIR Enthusiast · Security Operations
                       </span>
                     </h1>
-                    <p className="mt-4 text-base leading-relaxed text-muted-foreground break-words">
+                    <CredibilityBadges />
+                    <p className="mt-3 text-base leading-relaxed text-muted-foreground break-words">
                       I focus on blue team security — monitoring, incident investigation, threat
                       analysis, and security automation. I build small tools, document cases like
                       real engagements, and study attacker tradecraft so I can defend faster.
@@ -134,7 +137,8 @@ export default function Home() {
                   SOC Analyst · DFIR Enthusiast · Security Operations
                 </span>
               </h1>
-              <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
+              <CredibilityBadges />
+              <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
                 I focus on blue team security — monitoring, incident investigation, threat
                 analysis, and security automation. I build small tools, document cases like
                 real engagements, and study attacker tradecraft so I can defend faster.
@@ -285,6 +289,25 @@ export default function Home() {
         </div>
       </Section>
     </>
+  );
+}
+
+function CredibilityBadges() {
+  return (
+    <ul
+      className="mt-2.5 flex max-w-full flex-wrap items-center gap-x-2 gap-y-1.5 md:mt-3 md:flex-nowrap md:gap-2.5"
+      aria-label="Credentials"
+    >
+      {credibilityBadges.map((badge) => (
+        <li
+          key={badge}
+          className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-border/70 bg-surface/40 px-2.5 py-0.5 font-mono text-[10px] leading-tight text-muted-foreground/85 sm:text-[11px]"
+        >
+          <span className="h-1 w-1 flex-shrink-0 rounded-full bg-primary/50" aria-hidden />
+          {badge}
+        </li>
+      ))}
+    </ul>
   );
 }
 

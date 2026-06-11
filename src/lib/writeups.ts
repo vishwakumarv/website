@@ -193,3 +193,8 @@ export const writeupBySlug = Object.fromEntries(
 export const writeupByCategoryAndSlug = Object.fromEntries(
   writeups.map((post) => [`${post.category}/${post.slug.toLowerCase()}`, post])
 );
+
+/** Remove the leading markdown H1 when the article header already shows the title. */
+export function stripLeadingMarkdownTitle(body: string): string {
+  return body.replace(/^#\s+.+\r?\n+/, "");
+}

@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 export function Section({
   id,
@@ -16,7 +17,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24 ${className}`}>
+    <section id={id} className={cn("mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24", className)}>
       {(eyebrow || title || description) && (
         <div className="mb-10 max-w-3xl">
           {eyebrow && (

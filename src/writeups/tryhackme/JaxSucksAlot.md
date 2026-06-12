@@ -18,7 +18,8 @@ This room exploits a Node.js web application ("Horror LLC") that is vulnerable t
 **Attack chain:** Ping → RustScan → Nmap → Feroxbuster → Burp (cookie analysis) → `nodejsshell.py` CharCode payload → IIFE injection → Reverse shell → Shell upgrade → LinPEAS → `sudo npm` → Root
 
 ---
-
+## Target IP
+![TryHackMe Jax Sucks A Lot](/images/writeups/tryhackme/JaxSucksAlot/jax.jpeg)
 ## 1. Reconnaissance
 
 ### 1.1 Ping
